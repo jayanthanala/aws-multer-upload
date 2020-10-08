@@ -5,6 +5,7 @@ const express = require('express'),
   multer = require('multer'),
   multerS3 = require('multer-s3'),
   bodyParser = require('body-parser'),
+  //mongoose = require('mongoose'),
   aws = require('aws-sdk');
 
   app.use(express.static(__dirname + '/public'));
@@ -41,9 +42,18 @@ app.post("/upload",upload.array('fileupl',1),(req,res) => {
     data.location = file.location,
     data.key = file.key
   });
-  res.redirect("back");
-
+  res.redirect("/files");
 });
+
+app.get("/files/:bucket/:key",(req,res) => {
+  var params = { Bucket: req.params.bucket, Key: req.params.key };
+    s3.getObject(params, function(err, data) {
+    res.writeHead(200);
+    res.write(data.Body, 'binary');
+    res.end(null, 'binary');
+    console.log(data);
+});
+})
 
 app.listen(3000,() => {
   console.log("Server up at port 3000");
