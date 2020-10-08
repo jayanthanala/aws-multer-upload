@@ -46,5 +46,5 @@ app.post("/upload",upload.array('fileupl',1),(req,res) => {
 });
 
 app.listen(3000,() => {
-  console.log("server started");
+  console.log("Server up at port 3000");
 })
