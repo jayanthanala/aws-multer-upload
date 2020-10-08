@@ -46,6 +46,8 @@ app.post("/upload",upload.array('fileupl',1),(req,res) => {
 });
 
 app.get("/files/:bucket/:key",(req,res) => {
+
+  ///One way of getting the data from the bucket
   var params = { Bucket: req.params.bucket, Key: req.params.key };
     s3.getObject(params, function(err, data) {
     res.writeHead(200);
@@ -53,6 +55,7 @@ app.get("/files/:bucket/:key",(req,res) => {
     res.end(null, 'binary');
     console.log(data);
 });
+// Or else for images just give the value dats.location to the href attrubue  of the img tag in ejs file.
 })
 
 app.listen(3000,() => {
