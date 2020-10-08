@@ -41,7 +41,7 @@ app.post("/upload",upload.array('fileupl',1),(req,res) => {
     data.location = file.location,
     data.key = file.key
   });
-  res.json("Uploaded!");
+  res.redirect("back");
 
 });
 
